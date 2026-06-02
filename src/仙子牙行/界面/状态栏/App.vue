@@ -1,22 +1,13 @@
 <template>
   <div class="status-bar">
     <div class="sb-header">
-      <span class="sb-title">淫仙雌畜界完</span>
+      <span class="sb-title">仙子牙行</span>
       <span class="sb-day">第 {{ data?.场景状态?.日次 ?? 1 }} 日</span>
     </div>
 
     <div class="sb-section">
       <div class="sb-label">位置</div>
       <div class="sb-value">{{ data?.世界?.当前区域 ?? '--' }} · {{ data?.世界?.当前场景 ?? '--' }}</div>
-    </div>
-
-    <div class="sb-section">
-      <div class="sb-label">主角</div>
-      <div class="sb-row">
-        <span class="sb-stat">灵石 {{ data?.主角?.灵石 ?? 0 }}</span>
-        <span class="sb-stat">声誉 {{ data?.主角?.声誉 ?? 0 }}</span>
-        <span class="sb-stat">{{ data?.主角?.修为 ?? '凡人' }}</span>
-      </div>
     </div>
 
     <div class="sb-section" v-if="currentFairy">
@@ -27,21 +18,22 @@
         <span class="sb-stat">淫乱 {{ currentFairy.淫乱度 ?? 0 }}</span>
         <span class="sb-stat">{{ currentFairy.状态 ?? '--' }}</span>
       </div>
-      <div class="sb-row" v-if="currentFairy.体型">
-        <span class="sb-tag">体型: {{ currentFairy.体型 }}</span>
-        <span class="sb-tag">类型: {{ currentFairy.类型 ?? '--' }}</span>
+      <div class="sb-row" v-if="currentFairy.体型 || currentFairy.类型">
+        <span class="sb-tag" v-if="currentFairy.体型">{{ currentFairy.体型 }}</span>
+        <span class="sb-tag" v-if="currentFairy.类型">{{ currentFairy.类型 }}</span>
+        <span class="sb-tag" v-if="currentFairy.价格">灵石 {{ currentFairy.价格 }}</span>
+      </div>
+      <div class="sb-row" v-if="currentFairy.性格标签?.length">
+        <span class="sb-tag-pers" v-for="tag in currentFairy.性格标签" :key="tag">{{ tag }}</span>
       </div>
       <div class="sb-mods" v-if="currentFairy.身体改造?.length">
         <span class="sb-tag-mod" v-for="mod in currentFairy.身体改造" :key="mod">{{ mod }}</span>
       </div>
     </div>
 
-    <div class="sb-section">
-      <div class="sb-label">掌柜 阮媚娘</div>
-      <div class="sb-row">
-        <span class="sb-stat">好感 {{ data?.掌柜?.好感度 ?? 0 }}</span>
-        <span class="sb-stat">信任 {{ data?.掌柜?.信任度 ?? 0 }}</span>
-      </div>
+    <div class="sb-section" v-else>
+      <div class="sb-label">当前仙子</div>
+      <div class="sb-empty">暂无互动仙子</div>
     </div>
 
     <div class="sb-section" v-if="fairyList.length > 0">
@@ -87,8 +79,6 @@ const fairyList = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-height: 100%;
-  overflow-y: auto;
 }
 
 .sb-header {
@@ -129,9 +119,14 @@ const fairyList = computed(() => {
   color: #e2e8f0;
 }
 
+.sb-empty {
+  font-size: 12px;
+  color: #64748b;
+}
+
 .sb-row {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -151,6 +146,14 @@ const fairyList = computed(() => {
   font-size: 10px;
   background: rgba(255, 255, 255, 0.08);
   color: #94a3b8;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.sb-tag-pers {
+  font-size: 10px;
+  background: rgba(244, 114, 182, 0.2);
+  color: #f472b6;
   padding: 1px 6px;
   border-radius: 3px;
 }
