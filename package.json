@@ -82,7 +82,10 @@
     "@vueuse/core": "^13.9.0",
     "@vueuse/integrations": "^13.9.0",
     "@vueuse/shared": "^13.9.0",
+<<<<<<< HEAD
     "ajv": "^8.20.0",
+=======
+>>>>>>> 1b593ab69d89d2d5d22e9730e0163f19dd209fac
     "async-wait-until": "^2.0.31",
     "axios": "1.14.0",
     "compare-versions": "^6.1.1",
