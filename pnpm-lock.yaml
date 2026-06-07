@@ -23,9 +23,12 @@ importers:
       '@vueuse/shared':
         specifier: ^13.9.0
         version: 13.9.0(vue@3.5.35(typescript@6.0.0-dev.20250807))
+<<<<<<< HEAD
       ajv:
         specifier: ^8.20.0
         version: 8.20.0
+=======
+>>>>>>> b0b1703a805d03d3a4d97270fa3ebbc17a91f8b8
       async-wait-until:
         specifier: ^2.0.31
         version: 2.0.31
